@@ -17,6 +17,11 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
@@ -26,14 +31,15 @@ import javax.transaction.UserTransaction;
 public class CampeonDAO implements Serializable {
     
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my_persistence_unit");
+    private UserTransaction utx=null;
 
     public CampeonDAO(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
     }
-    public CampeonDAO(){}
+    public CampeonDAO(){
+}
     
-    private UserTransaction utx = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
@@ -46,10 +52,10 @@ public class CampeonDAO implements Serializable {
             em = getEntityManager();
             em.persist(campeon);
             utx.commit();
-        } catch (Exception ex) {
+        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
             try {
                 utx.rollback();
-            } catch (Exception re) {
+            } catch (IllegalStateException | SecurityException | SystemException re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
             if (findCampeon(campeon.getNombre()) != null) {

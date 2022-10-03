@@ -19,14 +19,14 @@
     <body>
         <div class="jumbotron"> 
             <h1>Datos a ingresar</h1>
-            <form action="nex" method="post">
+            <form action="nex" method="get">
                 <div class ="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" class ="form-control" placeholder="ingresa el nombre" required name="nombre">
                 </div>
                 <div class="form-group">
                     <label for="cost">Coste:</label>
-                    <input type="text" inputmode="numeric" pattern="[9-0]*" class="form-control" placeholder="Ingresa el coste" required name="cost">
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" placeholder="Ingresa el coste" required name="cost">
                 </div>
                 <div class="form-group">
                     <label for="origin">Origen:</label>

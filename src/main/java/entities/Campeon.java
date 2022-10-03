@@ -70,6 +70,16 @@ public class Campeon implements Serializable {
         this.clase1 = clase1;
     }
 
+    public Campeon(int coste, String origen, String clase1, String clase2, String nombre) {
+        this.coste = coste;
+        this.origen = origen;
+        this.clase1 = clase1;
+        this.clase2 = clase2;
+        this.nombre = nombre;
+    }
+    
+    
+
     public String getNombre() {
         return nombre;
     }
