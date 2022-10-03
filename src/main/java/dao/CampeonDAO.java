@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
@@ -23,13 +24,16 @@ import javax.transaction.UserTransaction;
  * @author yorsh
  */
 public class CampeonDAO implements Serializable {
+    
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my_persistence_unit");
 
     public CampeonDAO(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
     }
+    public CampeonDAO(){}
+    
     private UserTransaction utx = null;
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();

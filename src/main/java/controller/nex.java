@@ -1,5 +1,7 @@
 package controller;
 
+import dao.CampeonDAO;
+import entities.Campeon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -23,7 +25,7 @@ public class nex extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         
         String nombre=request.getParameter("nombre");
         int cost=Integer.parseInt(request.getParameter("cost"));
@@ -31,19 +33,20 @@ public class nex extends HttpServlet {
         String class1=request.getParameter("class1");
         String class2=request.getParameter("class2");
         
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet nex</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet nex at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        Campeon campeon = new Campeon();
+        
+        campeon.setNombre(nombre);
+        campeon.setCoste(cost);
+        campeon.setOrigen(origin);
+        campeon.setClase1(class1);
+        campeon.setClase2(class2);
+        
+        CampeonDAO dao = new CampeonDAO();
+        
+        
+        dao.create(campeon);
+        
+        request.getRequestDispatcher("done.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

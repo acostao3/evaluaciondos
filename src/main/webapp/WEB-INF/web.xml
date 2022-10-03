@@ -8,20 +8,14 @@
         <servlet-name>nex</servlet-name>
         <url-pattern>/nex</url-pattern>
     </servlet-mapping>
-    <session-config>
-        <data-source>
-            <description>DataSource campeones</description>
-            <name>public</name>
-            <class-name>org.postgresql.ds.PGSimpleDataSource</class-name>
-            <server-name>localhost</server-name>
-            <port-number>5432</port-number>
-            <database-name>public</database-name>
-            <user>postgres</user>
-            <password>PHrMgAUYYf6Z</password>
-        </data-source>
-        
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
+    <data-source>
+        <description>DataSource campeones</description>
+        <name>public</name>
+        <class-name>org.postgresql.ds.PGSimpleDataSource</class-name>
+        <server-name>localhost</server-name>
+        <port-number>5432</port-number>
+        <database-name>public</database-name>
+        <user>postgres</user>
+        <password>PHrMgAUYYf6Z</password>
+    </data-source>
 </web-app>
