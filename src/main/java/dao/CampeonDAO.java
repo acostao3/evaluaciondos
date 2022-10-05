@@ -31,10 +31,8 @@ import javax.transaction.UserTransaction;
 public class CampeonDAO implements Serializable {
     
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("my_persistence_unit");
-    private UserTransaction utx=null;
 
-    public CampeonDAO(UserTransaction utx, EntityManagerFactory emf) {
-        this.utx = utx;
+    public CampeonDAO( EntityManagerFactory emf) {
         this.emf = emf;
     }
     public CampeonDAO(){
@@ -48,16 +46,11 @@ public class CampeonDAO implements Serializable {
     public void create(Campeon campeon) throws PreexistingEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             em.persist(campeon);
-            utx.commit();
-        } catch (IllegalStateException | SecurityException | HeuristicMixedException | HeuristicRollbackException | NotSupportedException | RollbackException | SystemException ex) {
-            try {
-                utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
+            em.getTransaction().commit();
+        } catch (IllegalStateException | SecurityException  ex) {
             if (findCampeon(campeon.getNombre()) != null) {
                 throw new PreexistingEntityException("Campeon " + campeon + " already exists.", ex);
             }
@@ -72,13 +65,13 @@ public class CampeonDAO implements Serializable {
     public void edit(Campeon campeon) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             campeon = em.merge(campeon);
-            utx.commit();
+            em.getTransaction().commit();
         } catch (Exception ex) {
             try {
-                utx.rollback();
+                em.getTransaction().rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
@@ -100,8 +93,8 @@ public class CampeonDAO implements Serializable {
     public void destroy(String id) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             Campeon campeon;
             try {
                 campeon = em.getReference(Campeon.class, id);
@@ -110,10 +103,10 @@ public class CampeonDAO implements Serializable {
                 throw new NonexistentEntityException("The campeon with id " + id + " no longer exists.", enfe);
             }
             em.remove(campeon);
-            utx.commit();
+            em.getTransaction().commit();
         } catch (Exception ex) {
             try {
-                utx.rollback();
+                em.getTransaction().rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }

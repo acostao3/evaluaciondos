@@ -14,7 +14,7 @@
         <class-name>org.postgresql.ds.PGSimpleDataSource</class-name>
         <server-name>localhost</server-name>
         <port-number>5432</port-number>
-        <database-name>public</database-name>
+        <database-name>postgres</database-name>
         <user>postgres</user>
         <password>PHrMgAUYYf6Z</password>
     </data-source>

@@ -19,15 +19,15 @@ import javax.validation.constraints.Size;
  *
  * @author yorsh
  */
-@Entity
-@Table(name = "campeones")
+@Entity(name="campeones")
+@Table(name = "Campeones")
 @NamedQueries({
-    @NamedQuery(name = "Campeones.findAll", query = "SELECT c FROM Campeones c"),
-    @NamedQuery(name = "Campeones.findByNombre", query = "SELECT c FROM Campeones c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Campeones.findByCoste", query = "SELECT c FROM Campeones c WHERE c.coste = :coste"),
-    @NamedQuery(name = "Campeones.findByOrigen", query = "SELECT c FROM Campeones c WHERE c.origen = :origen"),
-    @NamedQuery(name = "Campeones.findByClase1", query = "SELECT c FROM Campeones c WHERE c.clase1 = :clase1"),
-    @NamedQuery(name = "Campeones.findByClase2", query = "SELECT c FROM Campeones c WHERE c.clase2 = :clase2")})
+    @NamedQuery(name = "Campeones.findAll", query = "SELECT c FROM campeones c"),
+    @NamedQuery(name = "Campeones.findByNombre", query = "SELECT c FROM campeones c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Campeones.findByCoste", query = "SELECT c FROM campeones c WHERE c.coste = :coste"),
+    @NamedQuery(name = "Campeones.findByOrigen", query = "SELECT c FROM campeones c WHERE c.origen = :origen"),
+    @NamedQuery(name = "Campeones.findByClase1", query = "SELECT c FROM campeones c WHERE c.clase1 = :clase1"),
+    @NamedQuery(name = "Campeones.findByClase2", query = "SELECT c FROM campeones c WHERE c.clase2 = :clase2")})
 public class Campeon implements Serializable {
 
     @Basic(optional = false)

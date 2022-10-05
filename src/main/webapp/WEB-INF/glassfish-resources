@@ -5,5 +5,8 @@
     <property name="URL" value="jdbc:postgresql://localhost:5432/postgres"/>
     <property name="User" value="postgres"/>
     <property name="Password" value="PHrMgAUYYf6Z"/>
+    <property name="serverName" value="localhost"/>
+    <property name="databaseName" value="postgres"/>
+    <property name="PortNumber" value="5432"/>
   </jdbc-connection-pool>
 </resources>
