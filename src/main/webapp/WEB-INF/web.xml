@@ -10,7 +10,7 @@
     </servlet-mapping>
     <data-source>
         <description>DataSource campeones</description>
-        <name>jdbc/myDatasource</name>
+        <name>java:app/yeet</name>
         <class-name>org.postgresql.ds.PGSimpleDataSource</class-name>
         <server-name>localhost</server-name>
         <port-number>5432</port-number>
